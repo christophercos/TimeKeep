@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import moment from 'moment';
 import firebase from './firebase'
 
+const dbRef = firebase.database().ref('/starCount');
 
 class TimerDisplay extends React.Component {
   render() {
@@ -18,19 +19,16 @@ const StarDisplay = (props) => {
   let starCount = props.starCount;
   let stars = [];
   for (let i = 0; i < starCount; i++) {
-      stars.push(<li><i className='fa fa-star-o fa-3x' aria-hidden='true'></i></li>);
+      stars.push(<li key={i}><i className='fa fa-star-o fa-3x' aria-hidden='true'></i></li>);
   }
-  // for (let key in starCount) {
-  //   return (
-  //     let listItem = <li></li>
-  //   )
-  // }
+
   return (
     <div>
       <ul>{stars}</ul>
     </div>
   )
 }
+
 
 class App extends React.Component {
   constructor() {
@@ -49,7 +47,23 @@ class App extends React.Component {
     this.stopTimer = this.stopTimer.bind(this);
   }
 
+  componentDidMount() {
+      dbRef.on('value', (snapshot) => {
+        let value = snapshot.val();
+        if (value !== null) {
+          this.setState({
+            starCount: value.count,
+          })
+        }
+      })
+  }
 
+  removeStars() {
+    dbRef.remove();
+    this.setState({
+      starCount: 0,
+    })
+  }
 
   startTimer() {
     const setTime = setInterval(this.reduceTimer, 1000);
@@ -76,10 +90,10 @@ class App extends React.Component {
           intervalSwitch: true,
         })
       } else {
+        dbRef.set({count: this.state.starCount + 1})
         this.setState({
           currentTime: moment.duration(breakInterval, 'minutes'),
           intervalSwitch: false,
-          starCount: this.state.starCount + 1,
         })
       }
     } else {
@@ -96,13 +110,6 @@ class App extends React.Component {
     clearInterval(this.state.timer)
   }
 
-  // componentDidMount() {
-  //   dbRef.on('value', (snapshot) => {
-  //
-  //   })
-  // }
-
-  // Every starcount should produce a star in the star container
   //star count data is held in firebase
   //star count should be 'clearable'
 
@@ -118,6 +125,8 @@ class App extends React.Component {
         <TimerDisplay currentTime={this.state.currentTime} />
         { this.state.timerIsRunning === true ? stopButton : startButton  }
         <StarDisplay starCount={this.state.starCount} />
+        <button onClick={() =>
+        this.removeStars()}>Remove</button>
       </div>
     )
   }
