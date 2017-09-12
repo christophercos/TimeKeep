@@ -1,0 +1,73 @@
+@import 'partials/_setup.scss';
+@import 'partials/_variables.scss';
+@import 'partials/_typography.scss';
+@import 'partials/_buttons.scss';
+
+body {
+  background: $lightBlue;
+  padding-top: 150px;
+}
+
+.container {
+  background: $white;
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: $shadow1;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titleBar {
+  width: 100%;
+  background: $lightBlue;
+}
+
+.titleBar h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.stripe {
+  height: 20px;
+  background: $darkBlue;
+}
+
+.starDisplay {
+  width: 85%;
+  min-height: 100px;
+  box-shadow: $shadow1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+ul {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: $shadow3;
+  transition: all 0.2s;
+}
+
+li:hover {
+  box-shadow: $shadow4;
+  transform: scale(1.1);
+}
+
+i {
+  color: $darkBlue;
+  text-shadow: $shadow1;
+}

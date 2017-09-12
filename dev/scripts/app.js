@@ -9,7 +9,7 @@ class TimerDisplay extends React.Component {
   render() {
     return(
       <div>
-        <h2>{`${this.props.currentTime.get('minutes')}:${this.props.currentTime.get('seconds')}`}</h2>
+        <h1>{`${this.props.currentTime.get('minutes')}:${this.props.currentTime.get('seconds')}`}</h1>
       </div>
     )
   }
@@ -21,14 +21,21 @@ const StarDisplay = (props) => {
   for (let i = 0; i < starCount; i++) {
       stars.push(<li key={i}><i className='fa fa-star-o fa-3x' aria-hidden='true'></i></li>);
   }
-
   return (
-    <div>
+    <div className="starDisplay">
       <ul>{stars}</ul>
     </div>
   )
 }
 
+const TitleBar = () => {
+  return (
+    <div className="titleBar">
+      <div className="stripe"></div>
+      <h2>TimeKeep</h2>
+    </div>
+  )
+}
 
 class App extends React.Component {
   constructor() {
@@ -40,7 +47,7 @@ class App extends React.Component {
       timer: null,
       timeArray: [2, 1],
       intervalSwitch: true,
-      starCount: 1,
+      starCount: 3,
     };
     this.startTimer = this.startTimer.bind(this);
     this.reduceTimer = this.reduceTimer.bind(this);
@@ -110,23 +117,21 @@ class App extends React.Component {
     clearInterval(this.state.timer)
   }
 
-  //star count data is held in firebase
-  //star count should be 'clearable'
-
   render() {
     let startButton = (
-      <button onClick={this.startTimer}>start</button>
+      <button className="startButton" onClick={this.startTimer}>start</button>
     );
     let stopButton = (
-      <button onClick={this.stopTimer}>stop</button>
+      <button className="startButton" onClick={this.stopTimer}>stop</button>
     );
     return (
-      <div>
+      <div className='container'>
+        <TitleBar />
         <TimerDisplay currentTime={this.state.currentTime} />
         { this.state.timerIsRunning === true ? stopButton : startButton  }
         <StarDisplay starCount={this.state.starCount} />
-        <button onClick={() =>
-        this.removeStars()}>Remove</button>
+        <button className ='removeButton' onClick={() =>
+        this.removeStars()}>-</button>
       </div>
     )
   }
