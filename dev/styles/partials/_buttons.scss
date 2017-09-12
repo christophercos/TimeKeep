@@ -54,9 +54,21 @@ button {
   font-size: 2rem;
   align-self: flex-end;
   transition: all 0.3s;
+  position: absolute;
+  top: 95%;
+  left: 96%;
+  transition: all 0.1s;
 }
 
 .removeButton:hover {
   box-shadow: $shadow4;
   transform: scale(1.2);
+}
+
+.removeButton:active {
+  transform: scale(1);
+}
+
+.removeButton:focus {
+  outline: none;
 }

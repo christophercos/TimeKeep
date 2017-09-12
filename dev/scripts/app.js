@@ -19,7 +19,7 @@ const StarDisplay = (props) => {
   let starCount = props.starCount;
   let stars = [];
   for (let i = 0; i < starCount; i++) {
-      stars.push(<li key={i}><i className='fa fa-star-o fa-3x' aria-hidden='true'></i></li>);
+      stars.push(<li key={i}><i className='fa fa-star fa-3x' aria-hidden='true'></i></li>);
   }
   return (
     <div className="starDisplay">
@@ -32,7 +32,7 @@ const TitleBar = () => {
   return (
     <div className="titleBar">
       <div className="stripe"></div>
-      <h2>TimeKeep</h2>
+      <h2><i className="fa fa-clock-o" aria-hidden="true"></i> TimeKeep</h2>
     </div>
   )
 }
@@ -42,12 +42,11 @@ class App extends React.Component {
     super();
     this.state = {
       currentTime: moment.duration(1, 'minutes'),
-      // baseTime: moment.duration(1, 'minutes'),
       timerIsRunning: false,
       timer: null,
       timeArray: [2, 1],
       intervalSwitch: true,
-      starCount: 3,
+      starCount: 0,
     };
     this.startTimer = this.startTimer.bind(this);
     this.reduceTimer = this.reduceTimer.bind(this);
@@ -96,12 +95,16 @@ class App extends React.Component {
           currentTime: moment.duration(workInterval, 'minutes'),
           intervalSwitch: true,
         })
+        const breakSound = new Audio('../../sounds/dingDongGuit.mp3');
+        breakSound.play();
       } else {
         dbRef.set({count: this.state.starCount + 1})
         this.setState({
           currentTime: moment.duration(breakInterval, 'minutes'),
           intervalSwitch: false,
-        })
+        });
+        const workSound = new Audio('../../sounds/arpeggio.mp3');
+        workSound.play();
       }
     } else {
       this.setState({
@@ -116,6 +119,7 @@ class App extends React.Component {
     })
     clearInterval(this.state.timer)
   }
+
 
   render() {
     let startButton = (

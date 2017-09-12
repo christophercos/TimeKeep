@@ -4,8 +4,8 @@
 @import 'partials/_buttons.scss';
 
 body {
-  background: $lightBlue;
-  padding-top: 150px;
+  background: $midnightBlue;
+  padding-top: 100px;
 }
 
 .container {
@@ -17,11 +17,14 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  padding-bottom: 50px;
 }
 
 .titleBar {
   width: 100%;
   background: $lightBlue;
+  box-shadow: $shadow1;
 }
 
 .titleBar h2 {
@@ -37,7 +40,7 @@ body {
 .starDisplay {
   width: 85%;
   min-height: 100px;
-  box-shadow: $shadow1;
+  box-shadow: $shadow3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,28 +49,34 @@ body {
 
 ul {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
 li {
   display: flex;
   justify-content: center;
+  flex-basis: 100px;
   align-items: center;
   background: $white;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  box-shadow: $shadow3;
-  transition: all 0.2s;
+
 }
 
-li:hover {
-  box-shadow: $shadow4;
-  transform: scale(1.1);
-}
-
-i {
+i.fa-star {
   color: $darkBlue;
   text-shadow: $shadow1;
+  animation: 1s ease-out 0s 1 spinIn;
+}
+
+@keyframes spinIn {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
