@@ -1,0 +1,19 @@
+
+@media only screen and (max-width:768px) {
+  .container {
+    width: 100%;
+    height: 100vh;
+  }
+
+  body {
+    padding-top: 0;
+  }
+
+  .starDisplay {
+    min-height: 300px;
+  }
+
+  .removeButton {
+    left: 45%;
+  }
+}

@@ -41,7 +41,7 @@ button {
 
 .startButton {
   padding: 10px 35px;
-  box-shadow: $shadow1;
+  box-shadow: $shadow3;
   position: relative;
   overflow: hidden;
 }
@@ -55,8 +55,8 @@ button {
   align-self: flex-end;
   transition: all 0.3s;
   position: absolute;
-  top: 95%;
-  left: 96%;
+  top: 85%;
+  left: 90%;
   transition: all 0.1s;
 }
 

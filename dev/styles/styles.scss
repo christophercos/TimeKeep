@@ -40,7 +40,7 @@ body {
 .starDisplay {
   width: 85%;
   min-height: 100px;
-  box-shadow: $shadow3;
+  box-shadow: $shadow1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,3 +80,5 @@ i.fa-star {
     transform: rotate(0deg);
   }
 }
+
+@import 'partials/_breakpoints.scss';
